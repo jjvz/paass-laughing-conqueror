@@ -3,6 +3,8 @@
 #define MCA_ROOT_H
 
 #include "MCA.h"
+
+#include <map>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -47,7 +49,7 @@ private:
 
 public:
     ///Default constructor
-    MCA_ROOT(PixieInterface *pif, const char *basename);
+    MCA_ROOT(AcqInterface *pif, const char *basename);
 
     ///Defaul destructor
     ~MCA_ROOT();

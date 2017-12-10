@@ -6,7 +6,7 @@
 #include "HisDrr.h"
 #include "Display.h"
 
-MCA_DAMM::MCA_DAMM(PixieInterface *pif, const char *basename) :
+MCA_DAMM::MCA_DAMM(AcqInterface *pif, const char *basename) :
         MCA(pif) {
     OpenFile(basename);
 }
@@ -33,7 +33,7 @@ bool MCA_DAMM::OpenFile(const char *basename) {
 }
 
 bool MCA_DAMM::StoreData(int mod, int ch) {
-    PixieInterface::word_t histo[ADC_SIZE];
+    AcqInterface::word_t histo[ADC_SIZE];
 
     _pif->ReadHistogram(histo, ADC_SIZE, mod, ch);
 

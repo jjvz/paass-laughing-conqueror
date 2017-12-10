@@ -10,7 +10,7 @@ class MCA_DAMM : public MCA {
 private:
     HisDrr *_histogram;
 public:
-    MCA_DAMM(PixieInterface *pif, const char *basename);
+    MCA_DAMM(AcqInterface *pif, const char *basename);
 
     ~MCA_DAMM();
 

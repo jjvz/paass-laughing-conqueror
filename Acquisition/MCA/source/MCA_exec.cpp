@@ -4,6 +4,10 @@
 
 #include "MCA_ROOT.h"
 #include "MCA_DAMM.h"
+#ifdef PAASS_BUILD_XIA_INTERFACE
+	#include "PixieInterface.hpp"
+#endif
+#include "EmulatedInterface.hpp"
 
 //printf("Usage: %s <outputType> [duration] [basename]\n",argv[0]);
 //printf("\touputType\tCan be either damm or root.\n");
@@ -25,16 +29,22 @@ int main(int argc, char *argv[]) {
     }
     if (totalTime == 0) totalTime = 10;
 
-    PixieInterface pif("pixie.cfg");
+    AcqInterface pif;
+#ifdef PAASS_BUILD_XIA_INTERFACE
+    pif = PixieInterface("pixie.cfg");
+#else
+    pif = EmulatedInterface();
+#endif
+
     pif.GetSlots();
 
     pif.Init();
 
     //cxx, end any ongoing runs
     pif.EndRun();
-    pif.Boot(PixieInterface::DownloadParameters |
-             PixieInterface::ProgramFPGA |
-             PixieInterface::SetDAC, true);
+    pif.Boot(AcqInterface::DownloadParameters |
+             AcqInterface::ProgramFPGA |
+             AcqInterface::SetDAC, true);
 
     pif.RemovePresetRunLength(0);
 
