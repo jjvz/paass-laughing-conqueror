@@ -29,37 +29,39 @@ int main(int argc, char *argv[]) {
     }
     if (totalTime == 0) totalTime = 10;
 
-    AcqInterface pif;
+    AcqInterface *pif;
+
 #ifdef PAASS_BUILD_XIA_INTERFACE
-    pif = PixieInterface("pixie.cfg");
+    pif = new PixieInterface("pixie.cfg");
 #else
-    pif = EmulatedInterface();
+    pif = new EmulatedInterface("pixie.cfg");
 #endif
 
-    pif.GetSlots();
+    pif->ReadSlotConfig();
 
-    pif.Init();
+    pif->Init();
 
     //cxx, end any ongoing runs
-    pif.EndRun();
-    pif.Boot(AcqInterface::DownloadParameters |
-             AcqInterface::ProgramFPGA |
-             AcqInterface::SetDAC, true);
+    pif->EndRun();
+    pif->Boot(AcqInterface::BootType::MCA, true);
 
-    pif.RemovePresetRunLength(0);
+    pif->RemovePresetRunLength(0);
 
 #if defined(USE_ROOT) && defined(USE_DAMM)
     MCA *mca;
-    if (useRoot) mca = new MCA_ROOT(&pif, basename);
-    else mca = new MCA_DAMM(&pif, basename);
+    if (useRoot) mca = new MCA_ROOT(pif, basename);
+    else mca = new MCA_DAMM(pif, basename);
 #elif defined(USE_ROOT)
-    MCA* mca = new MCA_ROOT(&pif,basename);
+    MCA* mca = new MCA_ROOT(pif,basename);
 #elif defined(USE_DAMM)
-    MCA* mca = new MCA_DAMM(&pif,basename);
+    MCA* mca = new MCA_DAMM(pif,basename);
 #endif
     if (mca->IsOpen())
         mca->Run(totalTime);
     delete mca;
+    delete pif;
 
     return EXIT_SUCCESS;
 }
+
+// vim: expandtab tabstop=4 shiftwidth=4 softtabstop=4 autoindent
