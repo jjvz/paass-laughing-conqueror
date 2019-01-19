@@ -120,7 +120,7 @@ bool BLMProcessor::Process(RawEvent &event) {
             histo.Plot(ungated::D_CI_RATES, t_CI_rate0);    // plots # events within 1 sec. period  
             cnts = 0;
             evt_tm0 = evt_tm;    // reset clock
-            if(PrntData) datfile << evt_tm <<"\t"<< cnts <<endl;
+            if(PrntData) datfile << evt_tm-evt_tm0 <<"\t"<< t_CI_scaler0 <<endl;
         }
         if(PrntDiag) {
             diagfile<<"Time diff. = "<<diff<<endl;
