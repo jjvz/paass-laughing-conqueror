@@ -43,6 +43,7 @@ private:
     TTree *tree_; //!< Pointer to the tree that we're going to define in the constructor
 
     std::ofstream diagfile;
+    std::ofstream datfile;
 };
 
 #endif

@@ -49,6 +49,10 @@ BLMProcessor::BLMProcessor() : EventProcessor(OFFSET, RANGE, "BLMProcessor") {
     diagname << Globals::get()->GetOutputPath() << Globals::get()->GetOutputFileName() << ".diag";
     diagfile.open(diagname.str().c_str());
 
+    stringstream datname;
+    datname << Globals::get()->GetOutputPath() << Globals::get()->GetOutputFileName() << ".dat";
+    datfile.open(datname.str().c_str());
+
     SetupRootOutput();
 }
 
@@ -65,6 +69,7 @@ void BLMProcessor::SetupRootOutput(void) {
 
 BLMProcessor::~BLMProcessor() {
     diagfile.close();
+    datfile.close();
 }
 
 void BLMProcessor::SetAssociatedTypes(void) {
@@ -79,6 +84,7 @@ bool BLMProcessor::Process(RawEvent &event) {
 
 // From TreeCorrelator:
     bool PrntDiag = TreeCorrelator::get()->place("PrntDiagnostics")->status();
+    bool PrntData = TreeCorrelator::get()->place("PrntData")->status();
 
 // --------------------- CI EVENT ---------------------------------------------------
     for (const auto &it : CI_evt) {
@@ -114,6 +120,7 @@ bool BLMProcessor::Process(RawEvent &event) {
             histo.Plot(ungated::D_CI_RATES, t_CI_rate0);    // plots # events within 1 sec. period  
             cnts = 0;
             evt_tm0 = evt_tm;    // reset clock
+            if(PrntData) datfile << evt_tm <<"\t"<< cnts <<endl;
         }
         if(PrntDiag) {
             diagfile<<"Time diff. = "<<diff<<endl;

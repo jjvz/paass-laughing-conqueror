@@ -39,6 +39,7 @@
     <TreeCorrelator name="root" verbose="false">
 
         <Place type="PlaceDetector" name="PrntDiagnostics" init="false" reset="false"/>
+        <Place type="PlaceDetector" name="PrntData" init="true" reset="false"/>
         	<!-- Set init="true" above to print diagnostics to output file -->
     </TreeCorrelator>
 
