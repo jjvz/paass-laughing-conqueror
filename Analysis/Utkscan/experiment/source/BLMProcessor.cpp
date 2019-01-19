@@ -11,8 +11,6 @@
 #include "DetectorDriver.hpp"
 #include "RawEvent.hpp"
 #include "RootHandler.hpp"
-
-#include <iterator>
  
 using namespace std;
 
@@ -22,11 +20,11 @@ static int t_CI_scaler0=0;  // this must be unchanged (initialised only once) un
 static int t_CI_scaler1=0;  // this must be unchanged (initialised only once) until I reset it after 1 sec.
 int t_CI_rate0=0;
 int t_CI_rate1=0;
-static int cnts=0;   
+static int cnts0=0;   
+static int cnts1=0;   
 static bool isFirst=false;
 static long int firsttm=1.0e15;    // initialized only once in loop
 static double diff=0;    // initialized only once in loop
-static double Ttime=-10.0;
 
 namespace dammIds {
     namespace experiment {
@@ -99,13 +97,13 @@ bool BLMProcessor::Process(RawEvent &event) {
             t_CI_time0 = (time-firsttm) * 1.0e3 * Globals::get()->GetClockInSeconds();
             if(t_CI_time0>0) t_CI_scaler0 = (int)(1+t_CI_time0/1000);
             else t_CI_scaler0 = 0;
-            cnts++;
+            cnts0++;
         }
         if(location==1) {
             t_CI_time1 = (time-firsttm) * 1.0e3 * Globals::get()->GetClockInSeconds();
             if(t_CI_time1>0) t_CI_scaler1 = (int)(1+t_CI_time1/1000);
             else t_CI_scaler1 = 0;
-            cnts++;
+            cnts1++;
         }
 
         if(PrntDiag) diagfile<<"CI time = "<<(time-firsttm) * 1.0e3 * Globals::get()->GetClockInSeconds()<<" : cnts = "<<cnts<<endl;
@@ -116,12 +114,14 @@ bool BLMProcessor::Process(RawEvent &event) {
         auto evt_tm = time;
         diff = (evt_tm-evt_tm0) * 1.0e3 * Globals::get()->GetClockInSeconds();    // [in ms]
         if(diff>=1000) { 
-            t_CI_rate0 = cnts; 
+            t_CI_rate0 = cnts0; 
+            t_CI_rate1 = cnts1; 
             histo.Plot(ungated::D_CI_RATES, t_CI_rate0);    // plots # events within 1 sec. period  
 
             if(PrntData) datfile << evt_tm-evt_tm0 <<"\t"<< t_CI_scaler0 <<"\t"<< cnts << endl;
 
-            cnts = 0;
+            cnts0 = 0;
+            cnts1 = 0;
             evt_tm0 = evt_tm;    // reset clock
         }
         if(PrntDiag) {
@@ -140,13 +140,12 @@ bool BLMProcessor::Process(RawEvent &event) {
 
 // ---------------------------------------------------------------------------
 
-    t_CI_time1 = -10.;
-    t_CI_rate1 = 0;
-    t_CI_scaler1 = 0;
     t_CI_time0 = -10.;
+    t_CI_time1 = -10.;
     t_CI_rate0 = 0;
+    t_CI_rate1 = 0;
     t_CI_scaler0 = 0;
-    Ttime=0;
+    t_CI_scaler1 = 0;
 
 // --------------------------------------------------------------------------------
 
