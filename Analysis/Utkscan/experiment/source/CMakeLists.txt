@@ -13,8 +13,8 @@ set(EXPERIMENT_SOURCES
         TwoChanTimingProcessor.cpp
         VandleOrnl2012Processor.cpp
         Pr270Processor.cpp
-        BLMProcessor.cpp
         BaGeLProcessor.cpp
+        BLMProcessor.cpp
         #WalkVandleBetaProcessor.cpp
         )
 

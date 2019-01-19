@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+    <Author>
+        <Name>JJ van Zyl</Name>
+        <Email>jjvz AT sun DOT ac DOT za</Email>
+        <Date>Feb. 2018</Date>
+    </Author>
+
+    <Description>
+        -----------------------------------------------------------------------------------------
+        A simple two telescope, dE-E detector setup for polarised beam measurements. A single 
+        250 MHz PIXIE16 module. 
+        Each dE-E telescope consisting of a 500um si surface barrier detector as dE, and a 3x5" 
+        NaI (Tl) scintillator as E. 
+        A copy of the LED pulser
+        Two 150um si detectors from the K-line polarimeter.
+        Two logic signals from ion source, pol_up and pol_down.
+        Single current integrator (CI) pulser train. 
+    </Description>
+
+    <Global>
+        <Revision version="F"/>
+        <EventWidth unit="s" value="1e-6"/>
+        <HasRaw value="true"/>
+    </Global>
+
+    <DetectorDriver>
+        <Processor name="BLMProcessor"/>
+    </DetectorDriver>
+
+    <Map verbose="true">
+        <Module number="0" firmware="34455" frequency="250">
+            <Channel number="0" type="ci" subtype="BLM" tags="monitor" ></Channel> <!--monitor no. 6 -->
+            <Channel number="1" type="ci" subtype="BLM" tags="centre" ></Channel> <!-- centre no. 5 -->
+        </Module>
+    </Map>
+
+
+    <TreeCorrelator name="root" verbose="false">
+
+        <Place type="PlaceDetector" name="PrntDiagnostics" init="false" reset="false"/>
+        	<!-- Set init="true" above to print diagnostics to output file -->
+    </TreeCorrelator>
+
+</Configuration>

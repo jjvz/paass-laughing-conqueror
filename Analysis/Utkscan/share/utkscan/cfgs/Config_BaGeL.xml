@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+    <Author>
+        <Name>JJ van Zyl</Name>
+        <Email>jjvz AT sun DOT ac DOT za</Email>
+        <Date>Feb. 2018</Date>
+    </Author>
+
+    <Description>
+        ---------------------------------------------
+        12x4 Clover detector Segments for BaGeL Campaign, Nov 2018 - 35921, 34688
+    </Description>
+
+    <Global>
+        <Revision version="F"/>
+        <EventWidth unit="s" value="1e-6"/>
+        <HasRaw value="true"/>
+    </Global>
+
+    <DetectorDriver>
+        <Processor name="BaGeLProcessor"/>
+    </DetectorDriver>
+
+    <Map verbose="true">
+        <Module number="0" firmware="34688" frequency="250">
+<!--            <Channel number="0" type="logic" subtype="trigger" tags="k600"></Channel>
+            <Channel number="1" type="logic" subtype="trigger" tags="tac"></Channel>
+            <Channel number="2" type="logic" subtype="trigger" tags="veto"></Channel>  -->
+            <Channel number="0" type="ge" subtype="clover" tags="k600trigger"></Channel>
+            <Channel number="1" type="ge" subtype="clover" tags="tac"></Channel>
+            <Channel number="2" type="ge" subtype="clover" tags="veto"></Channel>
+            <Channel number="4" type="ge" subtype="clover" tags="L1seg1" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="5" type="ge" subtype="clover" tags="L1seg2" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="6" type="ge" subtype="clover" tags="L1seg3" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="7" type="ge" subtype="clover" tags="L1seg4" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="8" type="ge" subtype="clover" tags="L2seg1" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="9" type="ge" subtype="clover" tags="L2seg2" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="10" type="ge" subtype="clover" tags="L2seg3" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="11" type="ge" subtype="clover" tags="L2seg4" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="12" type="ge" subtype="clover" tags="L3seg1" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="13" type="ge" subtype="clover" tags="L3seg2" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="14" type="ge" subtype="clover" tags="L3seg3" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="15" type="ge" subtype="clover" tags="L3seg4" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+        </Module>
+
+        <Module number="1" firmware="34688" frequency="250">
+            <Channel number="0" type="ge" subtype="clover" tags="L4seg1" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="1" type="ge" subtype="clover" tags="L4seg2" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="2" type="ge" subtype="clover" tags="L4seg3" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="3" type="ge" subtype="clover" tags="L4seg4" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="4" type="ge" subtype="clover" tags="L5seg1" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="5" type="ge" subtype="clover" tags="L5seg2" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="6" type="ge" subtype="clover" tags="L5seg3" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="7" type="ge" subtype="clover" tags="L5seg4" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="8" type="ge" subtype="clover" tags="L6seg1" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="9" type="ge" subtype="clover" tags="L6seg2" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="10" type="ge" subtype="clover" tags="L6seg3" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="11" type="ge" subtype="clover" tags="L6seg4" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+        </Module>
+
+        <Module number="2" firmware="34688" frequency="250">
+            <Channel number="4" type="ge" subtype="clover" tags="R1seg1" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="5" type="ge" subtype="clover" tags="R1seg2" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="6" type="ge" subtype="clover" tags="R1seg3" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="7" type="ge" subtype="clover" tags="R1seg4" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="8" type="ge" subtype="clover" tags="R2seg1" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="9" type="ge" subtype="clover" tags="R2seg2" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="10" type="ge" subtype="clover" tags="R2seg3" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="11" type="ge" subtype="clover" tags="R2seg4" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="12" type="ge" subtype="clover" tags="R3seg1" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="13" type="ge" subtype="clover" tags="R3seg2" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="14" type="ge" subtype="clover" tags="R3seg3" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="15" type="ge" subtype="clover" tags="R3seg4" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+        </Module>
+
+        <Module number="3" firmware="34688" frequency="250">
+            <Channel number="0" type="ge" subtype="clover" tags="R4seg1" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="1" type="ge" subtype="clover" tags="R4seg2" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="2" type="ge" subtype="clover" tags="R4seg3" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="3" type="ge" subtype="clover" tags="R4seg4" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="4" type="ge" subtype="clover" tags="R5seg1" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="5" type="ge" subtype="clover" tags="R5seg2" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="6" type="ge" subtype="clover" tags="R5seg3" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="7" type="ge" subtype="clover" tags="R5seg4" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="8" type="ge" subtype="clover" tags="R6seg1" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="9" type="ge" subtype="clover" tags="R6seg2" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="10" type="ge" subtype="clover" tags="R6seg3" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+            <Channel number="11" type="ge" subtype="clover" tags="R6seg4" >
+                <Calibration model="linear" min="0" max="64000"> 92.0 5.616 </Calibration>
+			</Channel>
+        </Module>
+    </Map>
+
+
+    <TreeCorrelator name="root" verbose="false">
+
+        <Place type="PlaceDetector" name="PrntDiagnostics" init="false" reset="false"/>
+        	<!-- Set init="true" above to print diagnostics to output file -->
+    </TreeCorrelator>
+
+</Configuration>

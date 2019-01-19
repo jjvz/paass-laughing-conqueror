@@ -49,6 +49,9 @@
 #include "IS600Processor.hpp"
 #include "TemplateExpProcessor.hpp"
 #include "TwoChanTimingProcessor.hpp"
+#include "Pr270Processor.hpp"
+#include "BaGeLProcessor.hpp"
+#include "BLMProcessor.hpp"
 #include "VandleOrnl2012Processor.hpp"
 
 using namespace std;
@@ -151,6 +154,12 @@ vector<EventProcessor *> DetectorDriverXmlParser::ParseProcessors(const pugi::xm
             vecProcess.push_back(new TwoChanTimingProcessor());
         } else if (name == "VandleOrnl2012Processor") {
             vecProcess.push_back(new VandleOrnl2012Processor());
+        } else if (name == "BLMProcessor") {
+            vecProcess.push_back(new BLMProcessor());
+        } else if (name == "BaGeLProcessor") {
+            vecProcess.push_back(new BaGeLProcessor());
+        } else if (name == "Pr270Processor") {
+            vecProcess.push_back(new Pr270Processor(processor.attribute("offline").as_uint(1)));
         } else {
             stringstream ss;
             ss << "DetectorDriverXmlParser: Unknown processor : " << name;

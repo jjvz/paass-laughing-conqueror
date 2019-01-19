@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+    <Author>
+        <Name>JJ van Zyl</Name>
+        <Email>jjvz AT sun DOT ac DOT za</Email>
+        <Date>Feb. 2018</Date>
+    </Author>
+
+    <Description>
+        -----------------------------------------------------------------------------------------
+        A simple two telescope, dE-E detector setup for polarised beam measurements. A single 
+        250 MHz PIXIE16 module. 
+        Each dE-E telescope consisting of a 500um si surface barrier detector as dE, and a 3x5" 
+        NaI (Tl) scintillator as E. 
+        A copy of the LED pulser
+        Two 150um si detectors from the K-line polarimeter.
+        Two logic signals from ion source, pol_up and pol_down.
+        Single current integrator (CI) pulser train. 
+    </Description>
+
+    <Global>
+        <Revision version="F"/>
+        <EventWidth unit="s" value="1e-6"/>
+        <HasRaw value="true"/>
+    </Global>
+
+    <DetectorDriver>
+        <Processor name="Pr270Processor"
+        	k_linepol="0"/>
+    </DetectorDriver>
+
+    <Map verbose="true">
+        <Module number="0" firmware="34455" frequency="250">
+            <Channel number="0" type="tel" subtype="E" tags="dE_Left" >    <!-- Si left -->
+<!--                <Calibration model="linear" min="0" max="32000"> 0.0 1.0 </Calibration> -->
+                <Calibration model="linear" min="0" max="32000"> 0.045 0.020523 </Calibration> 
+                        </Channel>
+            <Channel number="1" type="si" subtype="kpol" tags="Left" >
+                <Calibration model="linear" min="0" max="32000"> 92.0 5.616 </Calibration> <!-- pol_up/_dwn is calculated from set energy gates -->
+			</Channel>
+            <Channel number="4" type="tel" subtype="E" tags="dE_Right" > <!-- Si right -->
+<!--                <Calibration model="linear" min="0" max="32000"> 0.0 1.0 </Calibration> -->
+                <Calibration model="linear" min="0" max="32000"> 0.063 0.012033 </Calibration> 
+                        </Channel>
+            <Channel number="5" type="si" subtype="kpol" tags="Right" >
+                <Calibration model="linear" min="0" max="32000"> 71.0 6.820 </Calibration> <!-- pol_up/_dwn is calculated from set energy gates -->
+			</Channel>
+            <Channel number="7" type="pulser" subtype="E" tags="LED" ></Channel> 
+            <Channel number="8" type="tel" subtype="E" tags="E_Left" >
+                <Calibration model="linear" min="0" max="32000"> -11.114 0.01667 </Calibration>
+                        </Channel>
+            <Channel number="9" type="tel" subtype="E" tags="E_Right" >
+                <Calibration model="linear" min="0" max="32000"> 8.895 0.016362 </Calibration>
+                        </Channel>
+            <Channel number="12" type="ci" subtype="currentIntegrator" ></Channel>
+            <Channel number="14" type="logic" subtype="pol" tags="down" ></Channel> <!-- LogicProcessor looks for "logic_beam_start_0" -->
+            <Channel number="15" type="logic" subtype="pol"  tags="up" ></Channel> <!-- LogicProcessor looks for "logic_beam_stop_0" -->
+        </Module>
+    </Map>
+
+
+    <TreeCorrelator name="root" verbose="false">
+
+        <Place type="PlaceAND" name="SiLgate" reset="true">   <!-- K-pol LEFT gates-->
+            <Place type="PlaceThreshold" name="si_kpol_0"
+                low_limit="2248.0" high_limit="3130.0" replace="true"/> <!-- These are in units of calibrated energy -->
+        </Place>
+        <Place type="PlaceAND" name="SiRgate" reset="true">  <!-- K-pol RIGHT gates -->
+            <Place type="PlaceThreshold" name="si_kpol_1"
+                low_limit="2380.0" high_limit="3100.0" replace="true"/> <!-- These are in units of calibrated energy -->
+        </Place>
+
+        <Place type="PlaceAND" name="TelLgate" reset="true">  <!-- S.C. NaI LEFT gates  -->
+            <Place type="PlaceThreshold" name="tel_E_2"
+                low_limit="9420.0" high_limit="9680.0" replace="true"/> <!-- These are in units of calibrated energy -->
+        </Place>
+        <Place type="PlaceAND" name="TelRgate" reset="true"> <!-- S.C. NaI RIGHT gates-->
+            <Place type="PlaceThreshold" name="tel_E_3"
+                low_limit="8490.0" high_limit="8780.0" replace="true"/> <!-- These are in units of calibrated energy -->
+        </Place>
+<!--
+        <Place type="PlaceAND" name="TelescopeL" reset="true">  
+            <Place type="PlaceThreshold" name="tel_E_0"
+                low_limit="10.0" high_limit="32564" replace="true"/> 
+            <Place type="PlaceThreshold" name="tel_E_2"
+                low_limit="9250.0" high_limit="9500.0" replace="true"/> 
+        </Place>
+
+        <Place type="PlaceAND" name="TelescopeR" reset="true">  
+            <Place type="PlaceThreshold" name="tel_E_1"
+                low_limit="10.0" high_limit="32564" replace="true"/> 
+            <Place type="PlaceThreshold" name="tel_E_3"
+                low_limit="8420.0" high_limit="8730.0" replace="true"/>  
+        </Place>
+-->
+        <Place type="PlaceDetector" name="PolUp" reset="false"/> <!-- LogicProcessor looks for "Beam" status -->
+        <Place type="PlaceDetector" name="PolDwn" reset="false"/> <!-- LogicProcessor looks for "Beam" status -->
+        <Place type="PlaceDetector" name="PrntDiagnostics" init="false" reset="false"/>
+        <Place type="PlaceDetector" name="PrntPolarisation" init="false" reset="false"/>
+        <Place type="PlaceDetector" name="isK_linepol" init="false" reset="false"/>
+        	<!-- Set init="true" above to print diagnostics to output file -->
+    </TreeCorrelator>
+
+</Configuration>
