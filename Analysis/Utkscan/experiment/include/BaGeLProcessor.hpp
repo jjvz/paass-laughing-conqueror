@@ -1,4 +1,4 @@
-/// @file Pr270Processor.hpp
+/// @file BaGeLProcessor.hpp
 /// @brief Experiment processor for the PR270 Experiment at iThemba labs.
 /// @suthor S. V. Paulauskas
 /// @date January 15, 2018

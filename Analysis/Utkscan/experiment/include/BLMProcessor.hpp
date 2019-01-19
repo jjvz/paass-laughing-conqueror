@@ -1,12 +1,12 @@
-/// @file Pr270Processor.hpp
+/// @file BLMProcessor.hpp
 /// @brief Experiment processor for the PR270 Experiment at iThemba labs.
 /// @suthor S. V. Paulauskas
 /// @date January 15, 2018
 /// @copyright Copyright (c) 2017 S. V. Paulauskas.
 /// @copyright All rights reserved. Released under the Creative Commons Attribution-ShareAlike 4.0 International License
 /// Used for feature-pr270 branch (off upstream/master)
-#ifndef __PR270PROCESSOR_HPP__
-#define __PR270PROCESSOR_HPP__
+#ifndef __BLMPROCESSOR_HPP__
+#define __BLMPROCESSOR_HPP__
 #include "EventProcessor.hpp"
 
 #include <iostream>

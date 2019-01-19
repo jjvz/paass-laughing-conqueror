@@ -154,12 +154,12 @@ vector<EventProcessor *> DetectorDriverXmlParser::ParseProcessors(const pugi::xm
             vecProcess.push_back(new TwoChanTimingProcessor());
         } else if (name == "VandleOrnl2012Processor") {
             vecProcess.push_back(new VandleOrnl2012Processor());
-        } else if (name == "BLMProcessor") {
-            vecProcess.push_back(new BLMProcessor());
         } else if (name == "BaGeLProcessor") {
             vecProcess.push_back(new BaGeLProcessor());
         } else if (name == "Pr270Processor") {
             vecProcess.push_back(new Pr270Processor(processor.attribute("offline").as_uint(1)));
+        } else if (name == "BLMProcessor") {
+            vecProcess.push_back(new BLMProcessor());
         } else {
             stringstream ss;
             ss << "DetectorDriverXmlParser: Unknown processor : " << name;
