@@ -107,6 +107,7 @@ bool BLMProcessor::Process(RawEvent &event) {
         }
 
         if(PrntDiag) diagfile<<"CI time = "<<(time-firsttm) * 1.0e3 * Globals::get()->GetClockInSeconds()<<" : cnts = "<<cnts0<<endl;
+        if(PrntData) datfile << t_CI_time0 <<"\t"<< t_CI_scaler0 << endl;
         
 // Counting for 1 sec. (i.e. 1000 ms):
 // ----------------------------------
@@ -118,7 +119,8 @@ bool BLMProcessor::Process(RawEvent &event) {
             t_CI_rate1 = cnts1; 
             histo.Plot(ungated::D_CI_RATES, t_CI_rate0);    // plots # events within 1 sec. period  
 
-            if(PrntData) datfile << evt_tm-evt_tm0 <<"\t"<< t_CI_scaler0 <<"\t"<< cnts0 << endl;
+//            if(PrntData) datfile << t_CI_time0 <<"\t"<< cnts0 <<"\t"<< t_CI_time1 <<"\t"<< cnts1<< endl;
+//            if(PrntData) datfile << t_CI_time0 <<"\t"<< cnts0 <<"\t"<< t_CI_time1 <<"\t"<< cnts1<< endl;
 
             cnts0 = 0;
             cnts1 = 0;
