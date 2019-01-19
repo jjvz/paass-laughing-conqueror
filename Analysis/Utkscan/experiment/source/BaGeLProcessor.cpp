@@ -203,7 +203,7 @@ static int cntr=0;
     for (const auto &it : Ge_evt) {
         double chan = it->GetEnergy();
         double energy = it->GetCalibratedEnergy();
-        double time = it->GetTimeSansCfd();
+        double time = it->GetFilterTime();
 //        double time = it->GetTime();
         int location = it->GetChanID().GetLocation();
 
