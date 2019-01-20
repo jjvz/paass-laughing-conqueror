@@ -124,7 +124,7 @@ bool BLMProcessor::Process(RawEvent &event) {
             t_CI_rate1 = cnts1; 
             histo.Plot(ungated::D_CI_RATES, t_CI_rate0);    // plots # events within 1 sec. period  
 
-            if(PrntData) datfile << t_CI_time0 <<"\t"<< cnts0 <<"\t"<< t_CI_time1 <<"\t"<< cnts1<< endl;
+            if(PrntData) datfile << t_CI_time0 <<"\t"<< t_CI_rate0 <<"\t"<< t_CI_time1 <<"\t"<< t_CI_rate1<< endl;
 
             cnts0 = 0;
             cnts1 = 0;
