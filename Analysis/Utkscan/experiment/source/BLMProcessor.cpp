@@ -97,7 +97,7 @@ bool BLMProcessor::Process(RawEvent &event) {
             t_CI_time0 = (time-firsttm) * 1.0e3 * Globals::get()->GetClockInSeconds();
             if(t_CI_time0>0) t_CI_scaler0 = (int)(1+t_CI_time0/1000);
             else t_CI_scaler0 = 0;
-            cnts0++;
+            cnts0++;	// gives the number of entries of locatoin 0
         }
         if(location==1) {
             t_CI_time1 = (time-firsttm) * 1.0e3 * Globals::get()->GetClockInSeconds();
@@ -107,8 +107,13 @@ bool BLMProcessor::Process(RawEvent &event) {
         }
 
         if(PrntDiag) diagfile<<"CI time = "<<(time-firsttm) * 1.0e3 * Globals::get()->GetClockInSeconds()<<" : cnts = "<<cnts0<<endl;
-        if(PrntData) datfile << t_CI_time0 <<"\t"<< t_CI_scaler0 << endl;
-        
+//        if(PrntData) datfile << t_CI_time0 <<"\t"<< t_CI_scaler0 << endl;
+
+// Example of the above time and scalar values: 
+//	t_CI_time0 	t_CI_scaler0
+//	153999		154
+//	154002		155        
+
 // Counting for 1 sec. (i.e. 1000 ms):
 // ----------------------------------
         static long int evt_tm0 = firsttm;    // since its 'static', it will not re-initialise
@@ -119,8 +124,7 @@ bool BLMProcessor::Process(RawEvent &event) {
             t_CI_rate1 = cnts1; 
             histo.Plot(ungated::D_CI_RATES, t_CI_rate0);    // plots # events within 1 sec. period  
 
-//            if(PrntData) datfile << t_CI_time0 <<"\t"<< cnts0 <<"\t"<< t_CI_time1 <<"\t"<< cnts1<< endl;
-//            if(PrntData) datfile << t_CI_time0 <<"\t"<< cnts0 <<"\t"<< t_CI_time1 <<"\t"<< cnts1<< endl;
+            if(PrntData) datfile << t_CI_time0 <<"\t"<< cnts0 <<"\t"<< t_CI_time1 <<"\t"<< cnts1<< endl;
 
             cnts0 = 0;
             cnts1 = 0;
