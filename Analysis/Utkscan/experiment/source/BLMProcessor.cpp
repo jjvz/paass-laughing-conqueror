@@ -146,8 +146,8 @@ bool BLMProcessor::Process(RawEvent &event) {
 
 // ---------------------------------------------------------------------------
 
-    t_CI_time0 = -10.;
-    t_CI_time1 = -10.;
+    t_CI_time0 = 0;
+    t_CI_time1 = 0;
     t_CI_rate0 = 0;
     t_CI_rate1 = 0;
     t_CI_scaler0 = 0;
